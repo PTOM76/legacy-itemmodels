@@ -1,27 +1,27 @@
 modLoader="javafml"
 loaderVersion="[50,)"
 license="MIT"
-issueTrackerURL="https://github.com/PTOM76/CompatDatapacks/issues"
+issueTrackerURL="https://github.com/PTOM76/legacy-itemmodels/issues"
 
 [[mods]]
-modId="compatdatapacks76"
+modId="legacyitemmodels"
 version="${version}"
-displayName="CompatDatapacks"
-displayURL="https://curseforge.com/minecraft/mc-mods/compat-datapacks76"
+displayName="Legacy Itemmodels"
+displayURL="https://curseforge.com/minecraft/mc-mods/legacy-itemmodels"
 logoFile="icon.png"
 authors="PitaQ"
 description='''
 The mod enables backward compatibility for your Minecraft data packs.
 '''
 
-[[dependencies.compatdatapacks76]]
+[[dependencies.legacyitemmodels]]
 modId="forge"
 mandatory=true
 versionRange="[50,)"
 ordering="NONE"
 side="BOTH"
 
-[[dependencies.compatdatapacks76]]
+[[dependencies.legacyitemmodels]]
 modId="minecraft"
 mandatory=true
 versionRange="[1.21,)"

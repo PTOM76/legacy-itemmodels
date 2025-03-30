@@ -14,17 +14,6 @@ public class LegacyItemmodels {
 	public static final String MOD_ID = "legacyitemmodels";
 	public static final String MOD_NAME = "Legacy Itemmodels";
 
-	public static List<Identifier> items = new ArrayList<>();
-
-	static {
-		Registries.ITEM.getIds().forEach(id -> {
-			if (id.getNamespace().equals("minecraft"))
-				return;
-
-			items.add(id);
-		});
-	}
-
 	public static void init() {
 	}
 

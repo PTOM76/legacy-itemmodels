@@ -1,17 +1,17 @@
 {
   "schemaVersion": 1,
-  "id": "compatdatapacks76",
+  "id": "legacyitemmodels",
   "version": "${version}",
 
-  "name": "CompatDatapacks",
-  "description": "The mod enables backward compatibility for datapacks.",
+  "name": "Legacy Itemmodels",
+  "description": "Automatically create item models",
   "authors": [
     "PitaQ"
   ],
   "contact": {
-    "homepage": "https://curseforge.com/minecraft/mc-mods/compatdatapacks76",
-    "sources": "https://github.com/Pitan76/CompatDatapacks",
-    "issues": "https://github.com/Pitan76/CompatDatapacks/issues"
+    "homepage": "https://curseforge.com/minecraft/mc-mods/legacyitemmodels",
+    "sources": "https://github.com/PTOM76/legacy-itemmodels",
+    "issues": "https://github.com/PTOM76/legacy-itemmodels/issues"
   },
 
   "license": "MIT",

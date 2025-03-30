@@ -1,6 +1,6 @@
 cd "..\"
 
-set modid=compatdatapacks76
+set modid=legacyitemmodels
 
 git fetch origin
 timeout /T 1

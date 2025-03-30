@@ -3,7 +3,7 @@ plugins {
 }
 loom {
     forge {
-        mixinConfig "compatdatapacks76-common.mixins.json"
+        mixinConfig "legacyitemmodels-common.mixins.json"
     }
 }
 architectury {

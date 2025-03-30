@@ -1,27 +1,27 @@
 modLoader="javafml"
 loaderVersion="[1,)"
 license="MIT"
-issueTrackerURL="https://github.com/PTOM76/CompatDatapacks/issues"
+issueTrackerURL="https://github.com/PTOM76/legacy-itemmodels/issues"
 
 [[mods]]
-modId="compatdatapacks76"
+modId="legacyitemmodels"
 version="${version}"
-displayName="CompatDatapacks"
-displayURL="https://curseforge.com/minecraft/mc-mods/compat-datapacks76"
+displayName="Legacy Itemmodels"
+displayURL="https://curseforge.com/minecraft/mc-mods/legacy-itemmodels"
 logoFile="icon.png"
 authors="PitaQ"
 description='''
 The mod enables backward compatibility for datapacks.
 '''
 
-[[dependencies.compatdatapacks76]]
+[[dependencies.legacyitemmodels]]
    modId="neoforge"
    type = "required"
    versionRange="[21.0.40-beta,)"
    ordering="NONE"
    side="BOTH"
 
-[[dependencies.compatdatapacks76]]
+[[dependencies.legacyitemmodels]]
    modId="minecraft"
    type = "required"
    versionRange="[1.21,)"
@@ -29,4 +29,4 @@ The mod enables backward compatibility for datapacks.
    side="BOTH"
 
 [[mixins]]
-config = "compatdatapacks76-common.mixins.json"
+config = "legacyitemmodels-common.mixins.json"

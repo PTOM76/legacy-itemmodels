@@ -6,7 +6,7 @@ $matches[1] = str_replace(["\r", "\n"], '', $matches[1]);
 define('VERSION', $matches[1]);
 
 define('GROUP_ID', 'net.pitan76');
-define('ARTIFACT_ID', 'compatdatapacks76');
+define('ARTIFACT_ID', 'legacyitemmodels');
 
 define('DIRS', array(
     'common' => 'common/build/',
