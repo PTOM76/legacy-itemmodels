@@ -26,9 +26,7 @@ public class ResourceFinderMixin {
     @Inject(method = "toResourceId", at = @At("HEAD"))
     private void legacyitemmodels$toResourceId(Identifier path, CallbackInfoReturnable<Identifier> cir) {
         if (!Objects.equals(directoryName, "items")) return;
-
-        if (path.getNamespace().equals("minecraft"))
-            return;
+        if (path.getNamespace().equals("minecraft")) return;
 
         String[] split = path.getPath().replace(".json", "").split("/");
         Identifier id = Identifier.of(path.getNamespace(), split[split.length - 1]);
@@ -37,8 +35,8 @@ public class ResourceFinderMixin {
 
     @Inject(method = "findResources", at = @At("RETURN"))
     private void legacyitemmodels$findResources(ResourceManager resourceManager, CallbackInfoReturnable<Map<Identifier, Resource>> cir) {
-        if (!Objects.equals(directoryName, "items"))
-            return;
+        if (!Objects.equals(directoryName, "items")) return;
+        if (LegacyItemmodels.items.isEmpty()) return;
 
         Map<Identifier, Resource> map = cir.getReturnValue();
         for (Identifier id : LegacyItemmodels.items) {
@@ -47,5 +45,6 @@ public class ResourceFinderMixin {
             Resource resource = new Resource(DummyResourcePack.INSTANCE, () -> stream);
             map.put(id, resource);
         }
+        cir.setReturnValue(map);
     }
 }
