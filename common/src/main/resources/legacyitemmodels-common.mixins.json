@@ -4,7 +4,6 @@
   "package": "net.pitan76.legacyitemmodels.mixin",
   "compatibilityLevel": "JAVA_8",
   "mixins": [
-    "ItemAssetsLoaderMixin",
     "ResourceFinderMixin"
   ],
   "client": [

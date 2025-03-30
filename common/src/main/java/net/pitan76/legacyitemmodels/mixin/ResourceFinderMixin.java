@@ -33,14 +33,15 @@ public class ResourceFinderMixin {
         LegacyItemmodels.items.remove(id);
     }
 
-    @Inject(method = "findResources", at = @At("RETURN"))
+    @Inject(method = "findResources", at = @At("RETURN"), cancellable = true)
     private void legacyitemmodels$findResources(ResourceManager resourceManager, CallbackInfoReturnable<Map<Identifier, Resource>> cir) {
+        System.out.println(directoryName);
         if (!Objects.equals(directoryName, "items")) return;
         if (LegacyItemmodels.items.isEmpty()) return;
 
         Map<Identifier, Resource> map = cir.getReturnValue();
         for (Identifier id : LegacyItemmodels.items) {
-            String content = "{ \"model\": { \"type\": \"minecraft:model\", \"model\": \"" + id.getNamespace() + ":item/" + id.getPath() + "\" } }";
+            String content = "{\"model\":{\"type\":\"minecraft:model\",\"model\":\"" + id.getNamespace() + ":item/" + id.getPath() + "\"}}";
             InputStream stream = new ByteArrayInputStream(content.getBytes(StandardCharsets.UTF_8));
             Resource resource = new Resource(DummyResourcePack.INSTANCE, () -> stream);
             map.put(id, resource);
