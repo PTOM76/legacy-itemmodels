@@ -5,7 +5,7 @@ import net.minecraft.resource.ResourceFinder;
 import net.minecraft.resource.ResourceManager;
 import net.minecraft.util.Identifier;
 import net.pitan76.legacyitemmodels.DummyResourcePack;
-import net.pitan76.legacyitemmodels.LegacyItemmodels;
+import net.pitan76.legacyitemmodels.TempItems;
 import org.spongepowered.asm.mixin.Final;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Shadow;
@@ -28,23 +28,38 @@ public class ResourceFinderMixin {
         if (!Objects.equals(directoryName, "items")) return;
         if (path.getNamespace().equals("minecraft")) return;
 
-        String[] split = path.getPath().replace(".json", "").split("/");
+        String[] split = path.getPath()
+                .substring(0, path.getPath().length() - 5) // .json を削除
+                .split("/");
+
         Identifier id = Identifier.of(path.getNamespace(), split[split.length - 1]);
-        LegacyItemmodels.items.remove(id);
+        TempItems.items.remove(id);
     }
 
     @Inject(method = "findResources", at = @At("RETURN"), cancellable = true)
     private void legacyitemmodels$findResources(ResourceManager resourceManager, CallbackInfoReturnable<Map<Identifier, Resource>> cir) {
-        System.out.println(directoryName);
         if (!Objects.equals(directoryName, "items")) return;
-        if (LegacyItemmodels.items.isEmpty()) return;
+
+        //System.out.println("legacyitemmodels: ok");
+
+        if (TempItems.items.isEmpty()) return;
+
+        //System.out.println("legacyitemmodels: ok2");
 
         Map<Identifier, Resource> map = cir.getReturnValue();
-        for (Identifier id : LegacyItemmodels.items) {
+
+        //System.out.println("legacyitemmodels: " + map.keySet().iterator().next().toString());
+
+        for (Identifier id : TempItems.items) {
+            Identifier path = Identifier.of(id.getNamespace(), "items/" + id.getPath() + ".json");
+            if (map.containsKey(path)) continue;
+
             String content = "{\"model\":{\"type\":\"minecraft:model\",\"model\":\"" + id.getNamespace() + ":item/" + id.getPath() + "\"}}";
             InputStream stream = new ByteArrayInputStream(content.getBytes(StandardCharsets.UTF_8));
             Resource resource = new Resource(DummyResourcePack.INSTANCE, () -> stream);
-            map.put(id, resource);
+            map.put(path, resource);
+
+            System.out.println("legacyitemmodels: " + "id: " + id.toString() + ", path: " + path.toString());
         }
         cir.setReturnValue(map);
     }
