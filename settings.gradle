@@ -1,0 +1,18 @@
+pluginManagement {
+    repositories {
+        maven { url "https://maven.fabricmc.net/" }
+        maven { url "https://maven.architectury.dev/" }
+        maven { url "https://maven.minecraftforge.net/" }
+        maven { url "https://maven.neoforged.net/releases/" }
+        gradlePluginPortal()
+    }
+}
+
+include("common")
+var platforms = enabled_platforms.split(",")
+if (platforms.contains("fabric"))
+    include("fabric")
+if (platforms.contains("forge"))
+    include("forge")
+if (platforms.contains("neoforge"))
+    include("neoforge")
