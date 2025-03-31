@@ -1,6 +1,7 @@
 package net.pitan76.legacyitemmodels.config;
 
 import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
 import net.pitan76.legacyitemmodels.PlatformUtil;
 
 import java.io.File;
@@ -15,7 +16,7 @@ public class Config {
 
     private static Map<String, Object> map = new HashMap<>();
 
-    private static final Gson gson = new Gson();
+    private static final Gson gson = new GsonBuilder().setPrettyPrinting().create();
 
     public static boolean init = false;
 
