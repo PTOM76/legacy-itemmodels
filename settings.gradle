@@ -8,6 +8,8 @@ pluginManagement {
     }
 }
 
+rootProject.name = 'legacyitemmodels'
+
 include("common")
 var platforms = enabled_platforms.split(",")
 if (platforms.contains("fabric"))
