@@ -29,6 +29,7 @@ public class ResourceFinderMixin {
     private void legacyitemmodels$toResourceId(Identifier path, CallbackInfoReturnable<Identifier> cir) {
         if (!Config.isEnabled()) return;
         if (!Objects.equals(directoryName, "items")) return;
+        if (path == null) return;
         if (path.getNamespace().equals("minecraft")) return;
 
         String[] split = path.getPath()
@@ -49,6 +50,8 @@ public class ResourceFinderMixin {
         int count = 0;
 
         for (Identifier id : TempItems.items) {
+            if (id == null) continue;
+
             Identifier path = Identifier.of(id.getNamespace(), "items/" + id.getPath() + ".json");
             if (map.containsKey(path)) continue;
 
