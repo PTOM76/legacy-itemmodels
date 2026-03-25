@@ -1,10 +1,10 @@
 package net.pitan76.legacyitemmodels;
 
-import net.minecraft.registry.VersionedIdentifier;
+import net.minecraft.server.packs.repository.KnownPack;
 import net.minecraft.resource.*;
-import net.minecraft.resource.metadata.ResourceMetadataSerializer;
-import net.minecraft.text.Text;
-import net.minecraft.util.Identifier;
+import net.minecraft.server.packs.metadata.MetadataSectionType;
+import net.minecraft.network.chat.Component;
+import net.minecraft.resources.Identifier;
 import org.jetbrains.annotations.Nullable;
 
 import java.io.IOException;
@@ -16,10 +16,10 @@ public class DummyResourcePack implements ResourcePack {
 
     public static final DummyResourcePack INSTANCE = new DummyResourcePack();
 
-    public static final VersionedIdentifier VERSION_ID = new VersionedIdentifier(LegacyItemmodels.MOD_ID, "dummy", "1.0.0");
+    public static final KnownPack VERSION_ID = new VersionedIdentifier(LegacyItemmodels.MOD_ID, "dummy", "1.0.0");
     public static final ResourcePackInfo PACK_INFO = new ResourcePackInfo(
             LegacyItemmodels.MOD_ID,
-            Text.literal(LegacyItemmodels.MOD_NAME),
+            Component.literal(LegacyItemmodels.MOD_NAME),
             ResourcePackSource.NONE,
             Optional.of(VERSION_ID)
     );
@@ -30,7 +30,7 @@ public class DummyResourcePack implements ResourcePack {
     }
 
     @Override
-    public @Nullable InputSupplier<InputStream> open(ResourceType type, Identifier id) {
+    public @Nullable InputSupplier<InputStream> open(ResourceType type, KnownPack id) {
         return null;
     }
 
@@ -45,7 +45,7 @@ public class DummyResourcePack implements ResourcePack {
     }
 
     @Override
-    public @Nullable <T> T parseMetadata(ResourceMetadataSerializer<T> metadataSerializer) throws IOException {
+    public @Nullable <T> T parseMetadata(MetadataSectionType<T> metadataSerializer) throws IOException {
         return null;
     }
 

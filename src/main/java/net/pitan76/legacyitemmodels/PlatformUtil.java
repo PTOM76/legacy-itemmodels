@@ -1,10 +1,10 @@
-package net.pitan76.legacyitemmodels.fabric;
+package net.pitan76.legacyitemmodels;
 
 import net.fabricmc.loader.api.FabricLoader;
 
 import java.nio.file.Path;
 
-public class PlatformUtilImpl {
+public class PlatformUtil {
     public static Path getConfigDir() {
         return FabricLoader.getInstance().getConfigDir();
     }

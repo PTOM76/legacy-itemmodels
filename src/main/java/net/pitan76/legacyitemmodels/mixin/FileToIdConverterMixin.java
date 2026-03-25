@@ -1,9 +1,9 @@
-package net.pitan76.legacyitemmodels.neoforge.mixin;
+package net.pitan76.legacyitemmodels.mixin;
 
-import net.minecraft.resource.Resource;
-import net.minecraft.resource.ResourceFinder;
-import net.minecraft.resource.ResourceManager;
-import net.minecraft.util.Identifier;
+import net.minecraft.server.packs.resources.Resource;
+import net.minecraft.resources.FileToIdConverter;
+import net.minecraft.server.packs.resources.ResourceManager;
+import net.minecraft.resources.Identifier;
 import net.pitan76.legacyitemmodels.DummyResourcePack;
 import net.pitan76.legacyitemmodels.LegacyItemmodels;
 import net.pitan76.legacyitemmodels.TempItems;
@@ -21,14 +21,14 @@ import java.nio.charset.StandardCharsets;
 import java.util.Map;
 import java.util.Objects;
 
-@Mixin(ResourceFinder.class)
-public class ResourceFinderMixin {
-    @Shadow @Final private String directoryName;
+@Mixin(FileToIdConverter.class)
+public class FileToIdConverterMixin {
+    @Shadow @Final private String prefix;
 
-    @Inject(method = "toResourceId", at = @At("HEAD"))
+    @Inject(method = "fileToId", at = @At("HEAD"))
     private void legacyitemmodels$toResourceId(Identifier path, CallbackInfoReturnable<Identifier> cir) {
         if (!Config.isEnabled()) return;
-        if (!Objects.equals(directoryName, "items")) return;
+        if (!Objects.equals(prefix, "items")) return;
         if (path == null) return;
         if (path.getNamespace().equals("minecraft")) return;
 
@@ -40,10 +40,10 @@ public class ResourceFinderMixin {
         TempItems.items.remove(id);
     }
 
-    @Inject(method = "findResources", at = @At("RETURN"), cancellable = true)
+    @Inject(method = "listMatchingResources", at = @At("RETURN"), cancellable = true)
     private void legacyitemmodels$findResources(ResourceManager resourceManager, CallbackInfoReturnable<Map<Identifier, Resource>> cir) {
         if (!Config.isEnabled()) return;
-        if (!Objects.equals(directoryName, "items")) return;
+        if (!Objects.equals(prefix, "items")) return;
         if (TempItems.items.isEmpty()) return;
 
         Map<Identifier, Resource> map = cir.getReturnValue();
