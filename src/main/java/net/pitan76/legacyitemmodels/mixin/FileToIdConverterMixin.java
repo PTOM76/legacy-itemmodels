@@ -36,7 +36,7 @@ public class FileToIdConverterMixin {
                 .substring(0, path.getPath().length() - 5) // .json を削除
                 .split("/");
 
-        Identifier id = Identifier.of(path.getNamespace(), split[split.length - 1]);
+        Identifier id = Identifier.fromNamespaceAndPath(path.getNamespace(), split[split.length - 1]);
         TempItems.items.remove(id);
     }
 
@@ -52,7 +52,7 @@ public class FileToIdConverterMixin {
         for (Identifier id : TempItems.items) {
             if (id == null) continue;
 
-            Identifier path = Identifier.of(id.getNamespace(), "items/" + id.getPath() + ".json");
+            Identifier path = Identifier.fromNamespaceAndPath(id.getNamespace(), "items/" + id.getPath() + ".json");
             if (map.containsKey(path)) continue;
 
             String content = "{\"model\":{\"type\":\"minecraft:model\",\"model\":\"" + id.getNamespace() + ":item/" + id.getPath() + "\"}}";

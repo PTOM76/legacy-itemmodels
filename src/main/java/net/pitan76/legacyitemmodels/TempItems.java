@@ -10,10 +10,9 @@ public class TempItems {
     public static final Set<Identifier> items = ConcurrentHashMap.newKeySet();
 
     static {
-        BuiltInRegistries.ITEM.getIds().forEach(id -> {
+        BuiltInRegistries.ITEM.keySet().forEach(id -> {
             if (id == null) return;
             if (id.getNamespace().equals("minecraft")) return;
-
             items.add(id);
         });
     }
