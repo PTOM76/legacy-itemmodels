@@ -16,8 +16,8 @@ import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 
 import java.io.ByteArrayInputStream;
-import java.io.InputStream;
 import java.nio.charset.StandardCharsets;
+import java.util.HashMap;
 import java.util.Map;
 import java.util.Objects;
 
@@ -46,7 +46,7 @@ public class ResourceFinderMixin {
         if (!Objects.equals(directoryName, "items")) return;
         if (TempItems.items.isEmpty()) return;
 
-        Map<Identifier, Resource> map = cir.getReturnValue();
+        Map<Identifier, Resource> map = new HashMap<>(cir.getReturnValue());
         int count = 0;
 
         for (Identifier id : TempItems.items) {
@@ -56,8 +56,8 @@ public class ResourceFinderMixin {
             if (map.containsKey(path)) continue;
 
             String content = "{\"model\":{\"type\":\"minecraft:model\",\"model\":\"" + id.getNamespace() + ":item/" + id.getPath() + "\"}}";
-            InputStream stream = new ByteArrayInputStream(content.getBytes(StandardCharsets.UTF_8));
-            Resource resource = new Resource(DummyResourcePack.INSTANCE, () -> stream);
+            byte[] bytes = content.getBytes(StandardCharsets.UTF_8);
+            Resource resource = new Resource(DummyResourcePack.INSTANCE, () -> new ByteArrayInputStream(bytes));
             map.put(path, resource);
 
             count++;
