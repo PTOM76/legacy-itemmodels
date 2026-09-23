@@ -24,7 +24,7 @@ The mod enables backward compatibility for datapacks.
 [[dependencies.legacyitemmodels]]
    modId="minecraft"
    type = "required"
-   versionRange="[1.21,)"
+   versionRange="[26.1,)"
    ordering="NONE"
    side="BOTH"
 
